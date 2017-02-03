@@ -1,0 +1,114 @@
+/*  
+     // Place your snippets for powershell.json here. Each snippet is defined under a snippet name and has a prefix, body and 
+     // description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+     // $1, $2 for tab stops, ${id} and ${id:label} and ${1:label} for variables. Variables with the same id are connected.
+     // Example:
+     "Print to console": {
+        "prefix": "log",
+        "body": [
+            "console.log('$1');",
+            "$2"
+        ],
+        "description": "Log output to console"
+    }
+*/
+{
+ "verbose-end": {
+  "prefix": "verbose-end",
+  "body": [
+   "Write-Verbose -Message \"[\\$((get-date).TimeOfDay.ToString()) END    ] ${desc:Describe the Action}\""
+  ],
+  "description": "Writes a verbose message with the actual time and the identifier for the end block."
+ },
+ "verbose-process": {
+  "prefix": "verbose-process",
+  "body": [
+   "Write-Verbose -Message \"[\\$((get-date).TimeOfDay.ToString()) PROCESS] ${desc:Describe the Action}\""
+  ],
+  "description": "Writes a verbose message with the actual time and the identifier for the process block."
+ },
+ "verbose-begin": {
+  "prefix": "verbose-begin",
+  "body": [
+   "Write-Verbose -Message \"[\\$((get-date).TimeOfDay.ToString()) BEGIN  ] ${desc:Describe the Action}\""
+  ],
+  "description": "Writes a verbose message with the actual time and the identifier for the begin block."
+ },
+ "advanced-function": {
+  "prefix": "adv-function",
+  "body": [
+   "function ${functionname: FunctionName} {",
+   "<#",
+   "\t.SYNOPSIS",
+   "\t\tTitel des Skripts",
+   "\t",
+   "\t.DESCRIPTION",
+   "\t\tDetailliertere Beschreibung",
+   "",
+   "\t.PARAMETER Parametername",
+   "\t\tParamterbeschreibung",
+   "",
+   "\t.INPUTS",
+   "",
+   "\t.OUTPUTS",
+   "",
+   "\t.EXAMPLE",
+   "\t\t${functionname: FunctionName}",
+   "\t\tBeispiele wie das Script angewendet werden kann. z.B.:",
+   "#>",
+   "    [CmdletBinding()]",
+   "    param (",
+   "        ${param:# Add your parameters}",
+   "    )",
+   "    BEGIN {",
+   "        Write-Verbose \"Execution Metadata:\"",
+   "        Write-Verbose \"User = \\$(\\$env:userdomain)\\$(\\$env:USERNAME)\"",
+   "        \\$id = [System.Security.Principal.WindowsIdentity]::GetCurrent()",
+   "        \\$IsAdmin = [System.Security.Principal.WindowsPrincipal]::new(\\$id).IsInRole('administrators')",
+   "        Write-Verbose \"Is Admin = \\$IsAdmin\"",
+   "        Write-Verbose \"Computername = \\$env:COMPUTERNAME\"",
+   "        Write-Verbose \"OS = \\$((Get-CimInstance Win32_Operatingsystem).Caption)\"",
+   "        Write-Verbose \"Host = \\$(\\$host.Name)\"",
+   "        Write-Verbose \"PSVersion = \\$(\\$PSVersionTable.PSVersion)\"",
+   "        Write-Verbose \"Runtime = \\$(Get-Date)\"",
+   "        Write-Verbose \"[\\$((get-date).TimeOfDay.ToString()) BEGIN  ] Starting: \\$(\\$MyInvocation.Mycommand)\"",
+   "    } # begin",
+   "    PROCESS {",
+   "        Write-Verbose -Message \"[\\$((get-date).TimeOfDay.ToString()) PROCESS] Processing: ${desc:Object that is being processed}\"",
+   "        ${code:# Start writting code}",
+   "    } # process",
+   "    END{",
+   "        Write-Verbose -Message \"[\\$((get-date).TimeOfDay.ToString()) END    ] Ending: \\$(\\$MyInvocation.Mycommand)\"",
+   "} #end",
+   "} #function ${functionname: FunctionName}"
+  ],
+  "description": "An advanced PowerShell function with basic diagnostics in the BEGIN block and a."
+ },
+ "Powershell .PARAMETER comment-based help": {
+  "prefix": ".PARAMETER",
+  "body": [
+   ".PARAMETER ${name:Insert Parametername}",
+   "${desc:Die beschreibung des Parameters einfügen.}"
+  ],
+  "description": "Write the .PARAMETER comment based help."
+ },
+"Powershell .EXAMPLE comment-based help": {
+  "prefix": ".EXAMPLE",
+  "body": [
+   ".EXAMPLE",
+   "${function-name:Name of the function}",
+   "${description:Desctiption of the command.}"
+  ],
+  "description": "Write the .EXAMPLE comment based help."
+ },
+ "Parameter Block": {
+  "prefix": "parameter-block",
+  "body": [
+   "[CmdletBinding()]",
+   "param (",
+   "",
+   ")"
+  ],
+  "description": "Adding the cmdletbinding and a paramterblock."
+ }
+}

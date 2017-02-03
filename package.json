@@ -1,0 +1,27 @@
+{
+    "name": "powershell-snippets",
+    "description": "",
+    "version": "0.0.1",
+    "publisher": "lwalthert",
+    "engines": {
+        "vscode": "^1.9.0"
+    },
+    "categories": [
+        "Snippets"
+    ],
+    "repository": {
+        "url": "https://github.com/lwalthert/powershell-snippets.git"
+    },
+    "contributes": {
+        "snippets": [
+            {
+                "language": "powershell",
+                "path": "./snippets/powershell.json."
+            }
+        ]
+    },
+    "devDependencies": {
+       "powershell": "^0.9.0",
+        "vscode": "^1.9.0"
+   }
+}
